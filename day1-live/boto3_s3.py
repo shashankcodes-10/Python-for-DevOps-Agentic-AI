@@ -23,3 +23,25 @@ response = s3.list_buckets()
 print("\nAll Buckets:")
 for bucket in response["Buckets"]:
     print(bucket["Name"])
+
+
+# deleting object from bucket
+s3 = boto3.client("s3")
+
+bucket_name = "boto3-first-bucket-10"
+object_name = "hello.txt"
+
+s3.delete_object(
+    Bucket=bucket_name,
+    Key=object_name
+)
+
+print("File deleted successfully!")
+
+# deleting bucket 
+
+s3.delete_bucket(
+    Bucket=bucket_name
+)
+
+print("Bucket deleted successfully!")
