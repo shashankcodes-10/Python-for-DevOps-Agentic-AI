@@ -22,5 +22,21 @@ response = ec2.run_instances(
         }
     ]
 )
+# terminating instance
 
 print("Instance ID:", response["Instances"][0]["InstanceId"])
+
+ec2.terminate_instances(
+    InstanceIds=["i-0bf7726cbe628feba"]
+)
+
+
+# Wait until terminated
+
+waiter = ec2.get_waiter("instance_terminated")
+
+waiter.wait(
+    InstanceIds=["i-0bf7726cbe628feba"]
+)
+
+print("Instance terminated")
